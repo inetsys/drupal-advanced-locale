@@ -1,0 +1,51 @@
+<?php
+
+function advanced_locale_schema(){
+	$schema['advanced_locale_translation_files'] = array(
+		'fields' => array(
+			'clid' => array(
+				'type' => 'serial',
+				'unsigned' => true,
+				'not null' => true
+			),
+			'type' => array(
+				'type' => 'varchar',
+				'length' => 10,
+				'not null' => true,
+				'default' => ''
+			),
+			'name' => array(
+				'type' => 'varchar',
+				'length' => 50,
+				'not null' => true,
+				'default' => ''
+			),
+			'language' => array(
+				'type' => 'varchar',
+				'length' => 12,
+				'not null' => true,
+				'default' => ''
+			),
+			'file' => array(
+				'type' => 'varchar',
+				'length' => 255,
+				'not null' => true,
+				'default' => ''
+			),
+			'last_update' => array(
+				'type' => 'int',
+				'not null' => true,
+				'default' => 0
+			),
+			'checksum' => array(
+				'type' => 'varchar',
+				'length' => 40,
+				'not null' => true,
+				'default' => ''
+			)
+		),
+		'primary key' => array('clid'),
+	);
+
+	return $schema;
+}

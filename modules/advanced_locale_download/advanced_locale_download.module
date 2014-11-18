@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * Implementation of hook_help
+ */
+function advanced_locale_download_help($path, $args){
+	$message = null;
+
+	switch($path){
+		case 'admin/config/regional/translate/download':
+			$link = l(t('Regional settings'), 'admin/config/regional/settings');
+			$message = '<p>'.t('PO files for each active contrib module will be downloaded from drupal.org and stored in the configured translations folder (actually %folder). You can change this folder from !link. Existing files will be skipped. Remember to repeat this proccess anytime a module is updated.', array('%folder' => variable_get('advanced_locale_download_translations_path', conf_path().'/translations'), '!link' => $link)).'</p>';
+			break;
+	}
+
+	return $message;
+}
+
+/**
+ * Implementation of hook_menu
+ */
+function advanced_locale_download_menu(){
+	return array(
+		'admin/config/regional/translate/download' => array(
+			'title' => 'Download',
+			'access arguments' => array('administer languages'),
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array('advanced_locale_download_form'),
+			'type' => MENU_LOCAL_TASK,
+			'file' => 'advanced_locale_download.admin.inc',
+		),
+	);
+}

@@ -1,0 +1,43 @@
+#restore_translations_table{
+	table-layout: fixed;
+}
+
+#restore_translations_table .type {
+	cursor: pointer;
+}
+
+#restore_translations_table .type th {
+	background: #A6A7A2;
+	font-weight: 700;
+}
+#restore_translations_table .type th span{
+	font-weight: 400;
+}
+#restore_translations_table .type.updated th span{
+	color: darkgreen;
+}
+#restore_translations_table .type.needs_review th span{
+	color: orangered;
+}
+#restore_translations_table .name, #restore_translations_table .lang {
+	display:none;
+}
+
+#restore_translations_table .name th{
+	padding-left: 20px;
+}
+#restore_translations_table td:first-child {
+	padding-left: 40px;
+}
+
+#restore_translations_table span.status_1 {
+	padding: 5px 15px;
+	background: lightgreen;
+	color: darkgreen;
+}
+
+#restore_translations_table span.status_0 {
+	padding: 5px 15px;
+	background: moccasin;
+	color: orangered;
+}

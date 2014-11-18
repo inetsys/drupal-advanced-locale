@@ -1,0 +1,7 @@
+name = Advanced locale: extract translations
+description = [DEV util] Extracts translations string from code generating PO files in configured folder
+core = 7.x
+version = 7.x-1.0
+dependencies[] = advanced_locale
+dependencies[] = potx
+package = Multilanguage

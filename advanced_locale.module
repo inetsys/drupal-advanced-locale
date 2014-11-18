@@ -1,0 +1,86 @@
+<?php
+
+define('ADVANCED_LOCALE_NOT_FOUND', -1);
+define('ADVANCED_LOCALE_NEEDS_REVIEW', 0);
+define('ADVANCED_LOCALE_UPDATED', 1);
+
+define('ADVANCED_LOCALE_TYPE_CUSTOM', 'custom');
+define('ADVANCED_LOCALE_TYPE_CONTRIB', 'contrib');
+define('ADVANCED_LOCALE_TYPE_FEATURE', 'feature');
+define('ADVANCED_LOCALE_TYPE_THEME', 'theme');
+define('ADVANCED_LOCALE_TYPE_CORE', 'core');
+
+/**
+ * Implementation of hook_help
+ */
+function advanced_locale_help($path, $args){
+	$help = null;
+
+	switch($path){
+		case 'admin/config/regional/translate/restore':
+			$help = '<p>'.t('Click on each row to expand.').'</p>';
+			break;
+	}
+
+	return $help;
+}
+
+/**
+ * Implementation of hook_theme
+ */
+function advanced_locale_theme(){
+	return array(
+		'advanced_locale_restore_form' => array(
+			'render element' => 'form',
+			'file' => 'advanced_locale.theme.inc'
+		),
+	);
+}
+
+/**
+ * Implementation of hook_menu
+ */
+function advanced_locale_menu(){
+	return array(
+		'admin/config/regional/translate/restore' => array(
+			'title' => 'Restore',
+			'access arguments' => array('Update custom modules translations'),
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array('advanced_locale_restore_translations_form'),
+			'file' => 'advanced_locale.admin.inc',
+			'type' => MENU_LOCAL_TASK,
+		),
+	);
+}
+
+/**
+ * Implementation of hook_form_ID_alter
+ * Regional settings form
+ */
+function advanced_locale_form_system_regional_settings_alter(&$form, &$form_state, $form_id){
+	$form['advanced_locale'] = array(
+		'#type' => 'fieldset',
+		'#title' => t('Advanced settings'),
+		'#collapsible' => false,
+		'#collapsed' => false,
+	);
+
+	$form['advanced_locale']['advanced_locale_translations_path'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Translations folder'),
+		'#default_value' => variable_get('advanced_locale_translations_path', conf_path().'/translations')
+	);
+}
+
+/**
+ * Get defined types of translation files
+ */
+function _advanced_locale_get_types(){
+	return array(
+		ADVANCED_LOCALE_TYPE_CUSTOM => ADVANCED_LOCALE_TYPE_CUSTOM,
+		ADVANCED_LOCALE_TYPE_CONTRIB => ADVANCED_LOCALE_TYPE_CONTRIB,
+		ADVANCED_LOCALE_TYPE_FEATURE => ADVANCED_LOCALE_TYPE_FEATURE,
+		ADVANCED_LOCALE_TYPE_THEME => ADVANCED_LOCALE_TYPE_THEME,
+		ADVANCED_LOCALE_TYPE_CORE => ADVANCED_LOCALE_TYPE_CORE,
+	);
+}

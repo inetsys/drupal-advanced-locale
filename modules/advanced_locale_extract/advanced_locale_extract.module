@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Implementation of hook_form_ID_alter
+ * POTX extraction form
+ */
+function advanced_locale_extract_form_potx_select_form_alter(&$form, &$form_state, $form_id){
+	$form['full_extraction'] = array(
+		'#type' => 'submit',
+		'#value' => t('Full extraction'),
+		'#submit' => array('_advanced_locale_extract_full_extraction_submit')
+	);
+}
+
+/**
+ * POTX extraction form submit callback
+ * Full extraction button
+ */
+function _advanced_locale_extract_full_extraction_submit($form, &$form_state){
+	module_load_include('inc', 'advanced_locale_extract');
+	advanced_locale_extract_search_files();
+}

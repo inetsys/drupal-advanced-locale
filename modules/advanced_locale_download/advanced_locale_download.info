@@ -1,0 +1,6 @@
+name = Advanced locale: download PO files
+description = [DEV util] Download from drupal.org translation files for each active contrib module and core
+core = 7.x
+version = 7.x-1.0
+dependencies[] = advanced_locale
+package = Multilanguage
