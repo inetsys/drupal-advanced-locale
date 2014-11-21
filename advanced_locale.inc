@@ -334,6 +334,7 @@ function advanced_locale_restore_translation($mode, $type, $name, $code, $file){
 	if($filepath && file_exists($filepath)){
 		$file_object = new stdClass();
 		$file_object->uri = $filepath;
+		$file_object->filename = basename($filepath);
 
 		if(_locale_import_po($file_object, $code, $mode, 'default')){
 			// Update DB
